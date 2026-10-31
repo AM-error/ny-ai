@@ -1,0 +1,11 @@
+{
+  "name": "Naturmanden",
+  "short_name": "Naturmanden",
+  "description": "Trykpunkter, naturlige midler, øvelser og simple råd når du har det dårligt.",
+  "lang": "da",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f3ea",
+  "theme_color": "#2f5d3a",
+  "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml"}]
+}

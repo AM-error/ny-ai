@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naturmanden</title>
+<meta name="description" content="Beskriv hvordan du har det – få trykpunkter, naturlige midler, øvelser og simple råd.">
+<meta name="theme-color" content="#2f5d3a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+<style>
+:root{
+  --bg:#f6f3ea; --card:#fffdf7; --ink:#24301f; --muted:#5f6b58; --line:#e3ddcc;
+  --green:#2f5d3a; --green-soft:#e3eddc; --honey:#c98a1b; --honey-soft:#f8ecd2;
+  --red:#a8322a; --red-soft:#fbe4e1; --blue:#2d5f7a; --blue-soft:#e0edf3;
+  --radius:16px; --shadow:0 1px 2px rgba(40,50,30,.06),0 4px 14px rgba(40,50,30,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#151a14; --card:#1e251c; --ink:#e7eadf; --muted:#a3ad98; --line:#323c2e;
+    --green:#8fc49b; --green-soft:#253625; --honey:#e6b45a; --honey-soft:#3a2f1a;
+    --red:#f08a80; --red-soft:#3d1f1c; --blue:#8cc0dc; --blue-soft:#1b2f3a;
+    --shadow:none;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+main{max-width:760px;margin:0 auto;padding:16px 16px 80px}
+header{padding:20px 0 8px}
+h1{margin:0;font-size:28px;letter-spacing:-.01em}
+h1 span{color:var(--green)}
+.tag{color:var(--muted);margin:4px 0 0}
+h2{font-size:20px;margin:28px 0 10px}
+h3{font-size:16px;margin:0 0 6px}
+.search{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-top:16px}
+textarea{width:100%;min-height:92px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;background:var(--bg);color:var(--ink)}
+textarea:focus{outline:2px solid var(--green);outline-offset:1px}
+.row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:10px 18px}
+.primary{background:var(--green);color:var(--bg);font-weight:600}
+.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{background:var(--card);border:1px solid var(--line);color:var(--ink);padding:7px 12px;font-size:14px}
+.chip[aria-pressed=true]{background:var(--green-soft);border-color:var(--green)}
+.tabs{display:flex;gap:6px;margin-top:22px;overflow-x:auto;scrollbar-width:none}
+.tabs button{background:transparent;border:1px solid var(--line);color:var(--muted);padding:8px 14px;font-size:14px;white-space:nowrap;flex-shrink:0}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.alert{border-radius:var(--radius);padding:14px 16px;margin-top:16px;border:1px solid}
+.alert.red{background:var(--red-soft);border-color:var(--red);color:var(--ink)}
+.alert.red strong{color:var(--red)}
+.alert a{color:inherit;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:14px;overflow:hidden}
+.card>summary{list-style:none;cursor:pointer;padding:16px;display:flex;gap:12px;align-items:center}
+.card>summary::-webkit-details-marker{display:none}
+.card>summary .ico{font-size:28px;line-height:1}
+.card>summary .t{flex:1}
+.card>summary .t b{display:block;font-size:17px}
+.card>summary .t small{color:var(--muted)}
+.card>summary .arr{color:var(--muted);transition:transform .2s}
+.card[open]>summary .arr{transform:rotate(90deg)}
+.body{padding:0 16px 16px}
+.sec{margin-top:14px;padding:12px 14px;border-radius:12px}
+.sec h4{margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.05em}
+.sec.p{background:var(--green-soft)} .sec.p h4{color:var(--green)}
+.sec.m{background:var(--honey-soft)} .sec.m h4{color:var(--honey)}
+.sec.o{background:var(--blue-soft)} .sec.o h4{color:var(--blue)}
+.sec.r{background:var(--bg);border:1px solid var(--line)}
+.sec.l{background:var(--red-soft)} .sec.l h4{color:var(--red)}
+.item{margin:0 0 10px}
+.item:last-child{margin:0}
+.item b{display:block}
+.item .code{font-weight:400;color:var(--muted);font-size:13px}
+.item p{margin:2px 0 0}
+.warn{font-size:13px;color:var(--red);margin-top:2px}
+ul,ol{margin:4px 0 0;padding-left:20px}
+li{margin:2px 0}
+.howto{font-size:14px;color:var(--muted);margin:0 0 10px}
+.empty{color:var(--muted);text-align:center;padding:24px 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:left;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.tile span{font-size:24px}
+.tile small{color:var(--muted);font-size:13px}
+.fav{background:transparent;border:0;font-size:20px;padding:4px 6px;color:var(--muted)}
+footer{color:var(--muted);font-size:13px;margin-top:40px;border-top:1px solid var(--line);padding-top:14px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>🌿 Natur<span>manden</span></h1>
+    <p class="tag">Beskriv hvordan du har det – i krop eller sind. Få trykpunkter, naturlige midler, øvelser og simple råd.</p>
+  </header>
+
+  <section class="search" aria-label="Beskriv dit problem">
+    <label for="q" class="hide">Hvordan har du det?</label>
+    <textarea id="q" placeholder="F.eks. &quot;Jeg har ondt i nakken og hovedpine og sover dårligt&quot;"></textarea>
+    <div class="row">
+      <button class="primary" id="go">Find hjælp</button>
+      <button class="ghost" id="clear">Ryd</button>
+    </div>
+    <div class="chips" id="chips" aria-label="Hurtige valg"></div>
+  </section>
+
+  <div id="urgent"></div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="results" aria-selected="true">Resultater</button>
+    <button role="tab" data-tab="all" aria-selected="false">Alle emner</button>
+    <button role="tab" data-tab="favs" aria-selected="false">Gemte ★</button>
+    <button role="tab" data-tab="daily" aria-selected="false">Sund hverdag</button>
+  </nav>
+
+  <section id="results"></section>
+  <section id="all" class="hide"></section>
+  <section id="favs" class="hide"></section>
+  <section id="daily" class="hide"></section>
+
+  <footer>
+    Naturmanden giver almene råd om egenomsorg og erstatter ikke en læge. Søg læge, hvis symptomerne er kraftige, varer ved eller bliver værre.
+    Er du gravid, ammer, tager medicin eller har en kronisk sygdom, så tal med læge eller apotek før du bruger urter og kosttilskud.
+    <br><br><b>Akut:</b> 112 · <b>Lægevagt:</b> ring til din egen læge, uden for åbningstid lægevagten (Region Hovedstaden: 1813) · <b>Livslinien:</b> 70 201 201 · <b>Psykiatrifonden:</b> 39 25 25 25
+  </footer>
+</main>
+
+<script>
+/* ---------- Indhold ---------- */
+const TRYK = "Tryk fast men behageligt med tommel- eller fingerspids i 1–2 minutter, gerne med små cirkler. Træk vejret roligt og gentag på den anden side.";
+
+const EMNER = [
+{
+  id:"hovedpine", ikon:"🤕", titel:"Hovedpine & spændingshovedpine", sind:false,
+  ord:["hovedpin","hoved","tinding","pande","trykken i hovedet","jag i hovedet"],
+  kort:"Ofte udløst af spændte muskler, stress, for lidt vand eller søvn.",
+  punkter:[
+    {navn:"Hånd-punktet",kode:"LI4 · Hegu",hvor:"I den bløde muskel mellem tommel- og pegefinger, på højeste punkt når du klemmer dem sammen.",adv:"Undgå under graviditet."},
+    {navn:"Nakkegruberne",kode:"GB20 · Fengchi",hvor:"I de to fordybninger under kraniekanten, ca. 5 cm ud fra midten af nakken. Tryk opad mod kraniet."},
+    {navn:"Det tredje øje",kode:"Yintang",hvor:"Midt mellem øjenbrynene, hvor næseryggen møder panden."},
+    {navn:"Tindingerne",kode:"Taiyang",hvor:"I den bløde fordybning ved tindingen, en fingerbredde bag øjenkrogen."}
+  ],
+  midler:[
+    {navn:"Pebermynteolie",hvordan:"Fortynd 1–2 dråber i lidt neutral olie og gnid på tindinger og nakke. Undgå øjnene.",adv:"Ikke til små børn."},
+    {navn:"Et stort glas vand",hvordan:"Væskemangel er en hyppig årsag. Drik 3–5 dl og vent 30 minutter."},
+    {navn:"Kulde eller varme",hvordan:"Kold klud på panden, eller varmepude på nakken hvis den er spændt."}
+  ],
+  ovelser:[
+    {navn:"Hagetræk",trin:["Sid ret op og kig frem.","Skub hagen lige bagud, så du får “dobbelthage”.","Hold 5 sekunder, slap af. Gentag 10 gange."]},
+    {navn:"Sidebøj af nakken",trin:["Læg højre øre mod højre skulder.","Lad højre hånd hvile let på hovedet.","Hold 30 sekunder, skift side. 2 gange hver side."]}
+  ],
+  raad:["Hold pause fra skærmen hver time.","Spis regelmæssigt – lavt blodsukker kan udløse hovedpine.","Begræns kaffe til 2–3 kopper om dagen, og stop ikke brat."],
+  laege:["Pludselig, ekstremt kraftig hovedpine (“den værste nogensinde”) – ring 112.","Hovedpine med feber, nakkestivhed eller udslæt.","Hovedpine efter slag mod hovedet.","Synsforstyrrelser, lammelser, talebesvær eller forvirring – ring 112."]
+},
+{
+  id:"migraene", ikon:"🌩️", titel:"Migræne", sind:false,
+  ord:["migræn","lysfølsom","lydfølsom","aura","dunkende","bankende hovedpine"],
+  kort:"Dunkende, ofte ensidig hovedpine med kvalme og følsomhed for lys og lyd.",
+  punkter:[
+    {navn:"Hånd-punktet",kode:"LI4 · Hegu",hvor:"Mellem tommel- og pegefinger.",adv:"Undgå under graviditet."},
+    {navn:"Indre håndled",kode:"P6 · Neiguan",hvor:"3 fingerbredder over håndledsfolden, mellem de to sener på indersiden. Godt mod kvalmen."},
+    {navn:"Nakkegruberne",kode:"GB20 · Fengchi",hvor:"Under kraniekanten, ca. 5 cm ud fra midten af nakken."}
+  ],
+  midler:[
+    {navn:"Ingefær",hvordan:"Frisk ingefær i varmt vand eller ½ tsk ingefærpulver tidligt i anfaldet.",adv:"Forsigtighed ved blodfortyndende medicin."},
+    {navn:"Magnesium",hvordan:"Dagligt magnesium kan forebygge anfald hos nogle. Spørg apoteket om dosis.",adv:"Kan give løs mave."},
+    {navn:"Mørke og ro",hvordan:"Læg dig i et mørkt, stille rum med en kold klud over panden."}
+  ],
+  ovelser:[
+    {navn:"Rolig vejrtrækning",trin:["Læg dig ned i mørke.","Træk vejret ind i 4 sekunder, ud i 6 sekunder.","Fortsæt i 5 minutter."]}
+  ],
+  raad:["Før en dagbog over anfald: søvn, mad, menstruation, stress – find dine udløsere.","Faste sengetider, også i weekenden.","Spring ikke måltider over."],
+  laege:["Første migræneanfald efter 50-årsalderen.","Anfald der ændrer karakter eller bliver hyppigere.","Aura der varer over en time, eller lammelser – ring 112."]
+},
+{
+  id:"kvalme", ikon:"🤢", titel:"Kvalme & køresyge", sind:false,
+  ord:["kvalm","brække","kaste op","opkast","køresyg","søsyg","dårlig i maven","utilpas"],
+  kort:"Trykpunktet på håndleddet er et af de bedst undersøgte trykpunkter.",
+  punkter:[
+    {navn:"Indre håndled",kode:"P6 · Neiguan",hvor:"Læg 3 fingre fra håndledsfolden op ad underarmen. Punktet sidder lige over, mellem de to sener. Akupressurbånd fra apoteket rammer samme punkt."}
+  ],
+  midler:[
+    {navn:"Ingefær",hvordan:"Ingefærte, en skive frisk ingefær at tygge på, eller ingefærkiks."},
+    {navn:"Pebermyntete eller duft",hvordan:"Snus til pebermynteolie, eller drik en kop svag pebermyntete."},
+    {navn:"Små slurke",hvordan:"Små slurke koldt vand eller isterninger at sutte på."}
+  ],
+  ovelser:[
+    {navn:"Ved køresyge",trin:["Kig på horisonten, ikke på telefonen.","Frisk luft på ansigtet.","Sid forrest i bilen, eller midt i båden."]}
+  ],
+  raad:["Spis små, tørre måltider: tvebakker, ris, banan.","Undgå stærke madlugte og fed mad.","Læg dig med hovedet lidt hævet."],
+  laege:["Opkastning i mere end 1–2 døgn, eller hvis du ikke kan holde vand i dig.","Tegn på væskemangel: tør mund, meget lidt og mørk urin, svimmelhed.","Blod i opkastet, kraftige mavesmerter eller kvalme efter slag mod hovedet."]
+},
+{
+  id:"soevn", ikon:"🌙", titel:"Søvnproblemer", sind:true,
+  ord:["søvn","sove","sover","vågner","insomni","søvnløs","træt om morgen","ligger vågen","mareridt"],
+  kort:"Kroppen falder lettere i søvn, når den er rolig, kølig og i en fast rytme.",
+  punkter:[
+    {navn:"Hjertets port",kode:"HT7 · Shenmen",hvor:"I håndledsfolden på lillefingersiden, i den lille fordybning ved senen."},
+    {navn:"Fredfyldt søvn",kode:"Anmian",hvor:"Bag øret, midt mellem øreflippens knogle og nakkegruben."},
+    {navn:"Det tredje øje",kode:"Yintang",hvor:"Midt mellem øjenbrynene. Massér blidt."}
+  ],
+  midler:[
+    {navn:"Kamillete",hvordan:"En kop 30–60 minutter før sengetid."},
+    {navn:"Citronmelisse",hvordan:"Som te, alene eller sammen med kamille."},
+    {navn:"Baldrian",hvordan:"Fås på apoteket. Virker bedst efter 1–2 ugers daglig brug.",adv:"Ikke sammen med sovemedicin eller alkohol."},
+    {navn:"Lavendel",hvordan:"Et par dråber lavendelolie på hovedpuden."}
+  ],
+  ovelser:[
+    {navn:"4-7-8-vejrtrækning",trin:["Ånd ind gennem næsen i 4 sekunder.","Hold vejret i 7 sekunder.","Pust langsomt ud gennem munden i 8 sekunder.","Gentag 4 gange."]},
+    {navn:"Kropsscanning",trin:["Læg dig på ryggen.","Spænd tæerne i 5 sekunder og slap af.","Arbejd dig op gennem læg, lår, mave, hænder, skuldre og ansigt."]}
+  ],
+  raad:["Stå op på samme tidspunkt hver dag – også efter en dårlig nat.","Dagslys om morgenen, mindst 20 minutter.","Ingen skærm den sidste time. Køligt, mørkt soveværelse (ca. 18 °C).","Ingen kaffe efter kl. 14, og drop alkohol som sovemiddel.","Kan du ikke sove efter 20 minutter, så stå op og lav noget roligt."],
+  laege:["Søvnproblemer i mere end en måned, der påvirker din hverdag.","Kraftig snorken med vejrtrækningspauser.","Søvnløshed sammen med nedtrykthed eller angst."]
+},
+{
+  id:"stress", ikon:"🌊", titel:"Stress, uro & angst", sind:true,
+  ord:["stress","angst","uro","urolig","panik","nervøs","bekymr","overvæld","hjertebanken","rastløs","jag","presset","bange"],
+  kort:"Din krop kan lære at skrue ned for alarmen – især gennem vejret.",
+  punkter:[
+    {navn:"Hjertets port",kode:"HT7 · Shenmen",hvor:"I håndledsfolden på lillefingersiden."},
+    {navn:"Indre håndled",kode:"P6 · Neiguan",hvor:"3 fingerbredder over håndledsfolden, mellem senerne."},
+    {navn:"Det tredje øje",kode:"Yintang",hvor:"Midt mellem øjenbrynene."},
+    {navn:"Skulderens top",kode:"GB21 · Jianjing",hvor:"Midt på skulderens top, mellem nakke og skulderspids. Klem musklen.",adv:"Undgå under graviditet."}
+  ],
+  midler:[
+    {navn:"Kamille og citronmelisse",hvordan:"Som te 1–3 gange om dagen."},
+    {navn:"Lavendel",hvordan:"Duft til lavendelolie, eller kom lidt i et varmt bad."},
+    {navn:"Natur",hvordan:"20 minutter i skov, park eller ved vand sænker målbart stresshormonet."}
+  ],
+  ovelser:[
+    {navn:"Boks-vejrtrækning",trin:["Ånd ind i 4 sekunder.","Hold i 4.","Ånd ud i 4.","Hold i 4. Gentag i 2–5 minutter."]},
+    {navn:"5-4-3-2-1 (ved panik)",trin:["Nævn 5 ting du kan se.","4 ting du kan mærke.","3 ting du kan høre.","2 ting du kan dufte.","1 ting du kan smage."]},
+    {navn:"Ryst dig fri",trin:["Ryst hænder, arme og ben løst i 1 minut.","Stå stille og mærk efter."]}
+  ],
+  raad:["Bevægelse er et af de mest effektive midler mod stress – en rask gåtur tæller.","Skriv bekymringerne ned og læg papiret væk.","Skær ned på kaffe og energidrik, de kan forstærke uro.","Tal med nogen du stoler på."],
+  laege:["Når uro eller angst styrer din hverdag, eller varer flere uger.","Hjertebanken med brystsmerter, besvimelse eller åndenød – ring 112.","Egen læge kan henvise til psykolog med tilskud."]
+},
+{
+  id:"nedtrykt", ikon:"🌧️", titel:"Nedtrykt, trist eller ensom", sind:true,
+  ord:["trist","ked af","nedtrykt","depres","ensom","sorg","håbløs","tom indeni","ingen energi til noget","græder","lav stemning","alene"],
+  kort:"Små skridt hjælper. Du behøver ikke klare det alene.",
+  punkter:[
+    {navn:"Hjertets port",kode:"HT7 · Shenmen",hvor:"I håndledsfolden på lillefingersiden. Kan give ro."}
+  ],
+  midler:[
+    {navn:"Dagslys",hvordan:"Gå ud om formiddagen. Om vinteren kan en dagslyslampe (10.000 lux) i 30 minutter om morgenen hjælpe."},
+    {navn:"D-vitamin",hvordan:"Sundhedsstyrelsen anbefaler mange danskere D-vitamin i vinterhalvåret."},
+    {navn:"Om urter som perikon",hvordan:"Tal med læge først.",adv:"Perikon påvirker mange typer medicin, bl.a. p-piller og antidepressiva."}
+  ],
+  ovelser:[
+    {navn:"Én lille ting",trin:["Vælg én ting du kan klare i dag: gå 10 minutter, tage et bad, ringe til nogen.","Gør det, også selvom du ikke har lyst.","Læg mærke til hvordan det føltes bagefter."]},
+    {navn:"Gåtur i naturen",trin:["20–30 minutter, gerne i dagslys.","Læg telefonen i lommen og læg mærke til omgivelserne."]}
+  ],
+  raad:["Hold fast i rutiner: stå op, spis og gå i seng på faste tider.","Opsøg mennesker – også selvom det føles svært.","Skær ned på alkohol, det forstærker tristhed.","Skriv 3 ting ned hver aften, der gik okay."],
+  laege:["Hvis du har haft det sådan i mere end 2 uger.","Har du tanker om at skade dig selv eller ikke at ville leve: ring til Livslinien 70 201 201, eller 112 ved akut fare.","Psykiatrifondens rådgivning: 39 25 25 25. Børn og unge: Børnetelefonen 116 111."]
+},
+{
+  id:"ryg", ikon:"🦴", titel:"Ondt i lænden / ryggen", sind:false,
+  ord:["ryg","lænd","hekseskud","lumbago","ondt i bunden af ryggen","stiv i ryggen"],
+  kort:"Langt de fleste rygsmerter går over af sig selv. Bevægelse hjælper mere end hvile.",
+  punkter:[
+    {navn:"Bag knæet",kode:"BL40 · Weizhong",hvor:"Midt i knæhasen. Tryk blidt – traditionelt brugt mod lændesmerter."},
+    {navn:"Lændemusklerne",kode:"Massage",hvor:"Læg dig på to tennisbolde i en sok, én på hver side af rygsøjlen, og rul langsomt.",adv:"Aldrig direkte på rygsøjlen."}
+  ],
+  midler:[
+    {navn:"Varme",hvordan:"Varmepude, varmt bad eller kirsebærstenspude i 15–20 minutter."},
+    {navn:"Gurkemeje og ingefær",hvordan:"I maden eller som te – virker let antiinflammatorisk.",adv:"Forsigtighed ved blodfortyndende medicin og galdesten."}
+  ],
+  ovelser:[
+    {navn:"Knæ til bryst",trin:["Lig på ryggen.","Træk ét knæ op mod brystet med hænderne.","Hold 20 sekunder, skift. 3 gange hver side."]},
+    {navn:"Kattens ryg",trin:["Stå på alle fire.","Skyd ryggen op som en kat, mens du ånder ud.","Svaj ryggen roligt, mens du ånder ind. 10 gange."]},
+    {navn:"Bækkenvip",trin:["Lig på ryggen med bøjede knæ.","Pres lænden ned mod gulvet ved at stramme maven.","Hold 5 sekunder. 10 gange."]},
+    {navn:"Barnestilling",trin:["Sæt dig på hælene.","Før armene frem og læg panden mod gulvet.","Træk vejret ned i ryggen i 1 minut."]}
+  ],
+  raad:["Hold dig i bevægelse – korte gåture flere gange om dagen.","Skift stilling ofte, når du sidder.","Løft med bøjede knæ og tæt på kroppen."],
+  laege:["Ring 112 eller lægevagten: manglende kontrol over blære eller tarm, følelsesløshed i skridtet eller kraftesløshed i benene.","Rygsmerter med feber eller uforklaret vægttab.","Smerter efter fald eller uheld.","Ingen bedring efter 4–6 uger."]
+},
+{
+  id:"nakke", ikon:"💆", titel:"Nakke & skuldre", sind:false,
+  ord:["nakke","skulder","skuldre","stiv nakke","spændt","spændinger","muskelknude","trapez","skulderblad","mellem skulderbladene"],
+  kort:"Spændinger her hænger tæt sammen med skærmarbejde og stress.",
+  punkter:[
+    {navn:"Skulderens top",kode:"GB21 · Jianjing",hvor:"Midt på skulderens top. Klem musklen mellem tommel og fingre.",adv:"Undgå under graviditet."},
+    {navn:"Nakkegruberne",kode:"GB20 · Fengchi",hvor:"Under kraniekanten, ca. 5 cm ud fra midten."},
+    {navn:"Hånd-punktet",kode:"LI4 · Hegu",hvor:"Mellem tommel- og pegefinger.",adv:"Undgå under graviditet."}
+  ],
+  midler:[
+    {navn:"Varme",hvordan:"Varmepude eller varmt brusebad direkte på nakken."},
+    {navn:"Massage med olie",hvordan:"Bed nogen massere skuldrene, eller brug en bold mod væggen."}
+  ],
+  ovelser:[
+    {navn:"Skulderrul",trin:["Løft skuldrene op mod ørerne.","Rul dem bagud og ned.","10 gange, langsomt."]},
+    {navn:"Brystmuskelstræk i døråbning",trin:["Sæt underarmene på dørkarmen i skulderhøjde.","Læn dig let frem til du mærker stræk i brystet.","Hold 30 sekunder. 2–3 gange."]},
+    {navn:"Hagetræk",trin:["Skub hagen lige bagud.","Hold 5 sekunder. 10 gange."]},
+    {navn:"Skulderbladsklem",trin:["Klem skulderbladene sammen og ned.","Hold 5 sekunder. 10 gange."]}
+  ],
+  raad:["Skærmen i øjenhøjde, albuerne i 90 grader.","Rejs dig hvert 30.–45. minut.","Sov med en pude, der holder nakken lige."],
+  laege:["Nakkesmerter med feber og hovedpine.","Udstråling i armen med følelsesløshed eller kraftnedsættelse.","Smerter efter fald eller trafikuheld."]
+},
+{
+  id:"iskias", ikon:"⚡", titel:"Iskias & nervesmerter i benet", sind:false,
+  ord:["iskias","nerve","nervesmert","stråler ned i benet","udstråling","prikken i benet","sovende ben","balde","numb","snurren i benet"],
+  kort:"Nerver kan lide at glide frit. Blide nerveglidningsøvelser kan lindre.",
+  punkter:[
+    {navn:"Baldemusklen",kode:"Piriformis",hvor:"Midt i balden. Sæt dig på en tennisbold og rul langsomt, eller hold på et ømt punkt i 30–60 sekunder."},
+    {navn:"Bag knæet",kode:"BL40 · Weizhong",hvor:"Midt i knæhasen. Blidt tryk."}
+  ],
+  midler:[
+    {navn:"Varme eller kulde",hvordan:"Prøv begge og brug det, der føles bedst – 15 minutter ad gangen."}
+  ],
+  ovelser:[
+    {navn:"Nerveglid for iskiasnerven",trin:["Sid på en stol med ret ryg.","Stræk det ene ben ud, mens du løfter hovedet og kigger op.","Bøj benet igen, mens du sænker hovedet.","10–15 gange, roligt. Det må ikke gøre mere ondt."]},
+    {navn:"Piriformis-stræk",trin:["Lig på ryggen. Læg højre ankel over venstre knæ.","Træk venstre lår mod brystet.","Hold 30 sekunder. Skift side."]},
+    {navn:"Gåture",trin:["Korte ture på 10 minutter flere gange om dagen holder nerven i bevægelse."]}
+  ],
+  raad:["Undgå at sidde længe ad gangen.","Øvelserne skal kunne mærkes, men ikke forværre smerten."],
+  laege:["Ring 112 eller lægevagten: manglende kontrol over blære eller tarm, følelsesløshed i skridtet.","Tiltagende kraftesløshed i benet (f.eks. kan ikke gå på hæle eller tæer).","Ingen bedring efter 4–6 uger."]
+},
+{
+  id:"haand", ikon:"✋", titel:"Sovende hænder & musearm", sind:false,
+  ord:["sovende hånd","sovende fingre","snurren i hånd","prikken i fingre","karpaltunnel","musearm","håndled","albue","tennisalbue","ondt i armen","underarm"],
+  kort:"Ofte overbelastning eller en klemt nerve ved håndleddet.",
+  punkter:[
+    {navn:"Indre håndled",kode:"P6 · Neiguan",hvor:"3 fingerbredder over håndledsfolden, mellem senerne."},
+    {navn:"Underarmens muskler",kode:"Massage",hvor:"Stryg fast med tommelen fra håndled mod albue på oversiden og undersiden af underarmen."}
+  ],
+  midler:[
+    {navn:"Natskinne",hvordan:"En håndledsskinne om natten holder håndleddet lige og aflaster nerven."},
+    {navn:"Kulde",hvordan:"Ispose i et viskestykke 10 minutter efter belastning."}
+  ],
+  ovelser:[
+    {navn:"Nerveglid for hånden",trin:["Knyt hånden.","Stræk fingrene ud med tommelen ind.","Bøj håndleddet bagover.","Stræk tommelen ud til siden.","Hold hver stilling 3 sekunder. 5 runder."]},
+    {navn:"Underarmsstræk",trin:["Stræk armen frem med håndfladen ned.","Træk fingrene blidt nedad med den anden hånd.","Hold 20 sekunder, vend håndfladen op og gentag."]}
+  ],
+  raad:["Hold pauser fra mus og telefon.","Hold håndleddet lige når du skriver.","Skift mellem højre og venstre hånd hvor du kan."],
+  laege:["Vedvarende følelsesløshed eller svækket greb.","Muskelsvind ved tommelroden.","Symptomer der vækker dig hver nat."]
+},
+{
+  id:"muskler", ikon:"💪", titel:"Muskelsmerter & ømhed", sind:false,
+  ord:["muskel","ømme","øm","træningsøm","forstrakt","ondt i lår","ondt i læg","stive muskler","overanstreng","smerter i kroppen"],
+  kort:"Ømhed efter træning topper efter 1–2 døgn og forsvinder af sig selv.",
+  punkter:[
+    {navn:"Ømme punkter (triggerpunkter)",kode:"Massage",hvor:"Find det ømme punkt i musklen og hold et jævnt tryk i 30–90 sekunder, til ømheden aftager."},
+    {navn:"Skinnebenspunktet",kode:"ST36 · Zusanli",hvor:"4 fingerbredder under knæskallen, en fingerbredde ud til siden for skinnebenet. Traditionelt mod træthed i benene."}
+  ],
+  midler:[
+    {navn:"Varmt bad med Epsom-salt",hvordan:"Afslappende for musklerne – 2 dl salt i et varmt bad."},
+    {navn:"Syrlig kirsebærjuice",hvordan:"Nogle studier viser mindre ømhed efter hård træning."},
+    {navn:"Protein og vand",hvordan:"Spis protein efter træning og drik godt."}
+  ],
+  ovelser:[
+    {navn:"Let bevægelse",trin:["Gå eller cykel roligt i 15–20 minutter – det øger blodgennemstrømningen."]},
+    {navn:"Skumrulle",trin:["Rul langsomt over den ømme muskel i 1–2 minutter.","Stop på ømme steder og træk vejret."]},
+    {navn:"Blid udstrækning",trin:["Stræk musklen roligt, hold 30 sekunder.","Ingen gyngende bevægelser."]}
+  ],
+  raad:["Ved akut skade de første døgn: ro, kulde, kompression og løft af den skadede del.","Byg træning langsomt op."],
+  laege:["Kraftig hævelse, misfarvning eller du kan ikke støtte på benet.","Mørk/brun urin efter hård træning med ekstreme muskelsmerter – søg læge samme dag.","Hævet, varm og øm læg – kan være en blodprop."]
+},
+{
+  id:"kramper", ikon:"🦵", titel:"Lægkramper & natkramper", sind:false,
+  ord:["krampe","kramper","lægkrampe","natkrampe","fodkrampe","trækninger"],
+  kort:"Stræk musklen med det samme, så slipper krampen hurtigst.",
+  punkter:[
+    {navn:"Midt på læggen",kode:"BL57 · Chengshan",hvor:"Midt bag på læggen, hvor lægmusklen deler sig i et V. Fast tryk under krampen."}
+  ],
+  midler:[
+    {navn:"Vand og salt",hvordan:"Drik godt, især efter sved og varme."},
+    {navn:"Magnesium",hvordan:"Kan prøves i et par uger – virkningen er usikker for de fleste."}
+  ],
+  ovelser:[
+    {navn:"Under krampen",trin:["Stræk benet og træk tæerne op mod dig.","Eller stå op og læg vægten på det kramperamte ben."]},
+    {navn:"Lægstræk før sengetid",trin:["Stå med hænderne mod en væg, det ene ben bagud.","Hold hælen i gulvet og læn dig frem.","Hold 30 sekunder. 3 gange hvert ben."]}
+  ],
+  raad:["Undgå at sove med strakte tæer – lad dynen være løs ved fødderne."],
+  laege:["Hyppige kramper der forstyrrer søvnen.","Kramper der startede efter ny medicin.","Hævelse, rødme eller varme i læggen."]
+},
+{
+  id:"led", ikon:"🦿", titel:"Ledsmerter & knæ", sind:false,
+  ord:["led","knæ","hofte","gigt","artrose","slidgigt","stive led","ankel","fod"],
+  kort:"Led har brug for bevægelse for at holde sig sunde.",
+  punkter:[
+    {navn:"Under knæet",kode:"ST36 · Zusanli",hvor:"4 fingerbredder under knæskallen, en fingerbredde ud for skinnebenet."},
+    {navn:"Knæets øjne",kode:"Xiyan",hvor:"I de to små fordybninger på hver side under knæskallen. Massér blidt med cirkler."}
+  ],
+  midler:[
+    {navn:"Gurkemeje",hvordan:"I maden sammen med sort peber og lidt fedt for bedre optagelse.",adv:"Forsigtighed ved blodfortyndende medicin og galdesten."},
+    {navn:"Omega-3",hvordan:"Fed fisk 2 gange om ugen: makrel, laks, sild."},
+    {navn:"Varme ved stivhed",hvordan:"Varmt bad eller varmepude om morgenen."}
+  ],
+  ovelser:[
+    {navn:"Lårspænd",trin:["Sid med strakt ben.","Pres knæhasen ned mod underlaget ved at spænde lårmusklen.","Hold 5 sekunder. 10 gange."]},
+    {navn:"Rejse-sætte-sig",trin:["Rejs dig fra en stol uden at bruge armene.","Sæt dig langsomt igen. 10 gange."]},
+    {navn:"Cykling",trin:["Let cykling eller motionscykel 15–20 minutter skåner leddene."]}
+  ],
+  raad:["Vægttab aflaster knæ og hofter mærkbart.","Godt fodtøj med støddæmpning.","Svømning og vandgymnastik er skånsomt."],
+  laege:["Hævet, rødt og varmt led – især med feber.","Pludselig kraftig smerte i et led (f.eks. storetåen).","Leddet låser eller giver efter."]
+},
+{
+  id:"forkoelelse", ikon:"🤧", titel:"Forkølelse & ondt i halsen", sind:false,
+  ord:["forkøl","snue","tilstoppet","næse","ondt i halsen","halsen","influenza","feber","syg","bihule","kold"],
+  kort:"Forkølelse går over af sig selv på 7–10 dage. Du kan lindre undervejs.",
+  punkter:[
+    {navn:"Ved næsevingen",kode:"LI20 · Yingxiang",hvor:"I furen ved siden af næsevingen. Tryk og massér ved tilstoppet næse."},
+    {navn:"Hånd-punktet",kode:"LI4 · Hegu",hvor:"Mellem tommel- og pegefinger.",adv:"Undgå under graviditet."},
+    {navn:"Over øjenbrynet",kode:"BL2 · Zanzhu",hvor:"I den lille fordybning ved den indre ende af øjenbrynet. Godt ved bihuletryk."}
+  ],
+  midler:[
+    {navn:"Honning",hvordan:"1–2 tsk honning i varmt (ikke kogende) vand eller te lindrer halsen.",adv:"Aldrig til børn under 1 år."},
+    {navn:"Ingefær-citron-te",hvordan:"Riv frisk ingefær i varmt vand, pres citron i og kom honning ved."},
+    {navn:"Saltvandsgurgling",hvordan:"½ tsk salt i et glas lunkent vand. Gurgl flere gange dagligt."},
+    {navn:"Damp",hvordan:"Varmt brusebad eller damp fra en skål varmt vand med håndklæde over hovedet.",adv:"Pas på skoldning – ikke til børn."},
+    {navn:"Hvidløg",hvordan:"Frisk hvidløg i maden."}
+  ],
+  ovelser:[],
+  raad:["Hvil og drik rigeligt.","Varm suppe – hønsesuppe er ikke bare et gammelt råd.","Sov med hovedet lidt hævet ved tilstoppet næse.","Vask hænder for at undgå at smitte andre."],
+  laege:["Feber over 39 °C i mere end 3 dage, eller feber der kommer igen.","Åndenød eller smerter ved vejrtrækning.","Kraftige halssmerter med svært ved at synke eller åbne munden.","Sløvhed, stiv nakke eller udslæt der ikke forsvinder ved tryk – ring 112."]
+},
+{
+  id:"hoste", ikon:"😮‍💨", titel:"Hoste", sind:false,
+  ord:["hoste","hoster","slim","kriller i halsen","tør hoste","astma"],
+  kort:"Honning er dokumenteret at lindre hoste – også bedre end mange hostesafter.",
+  punkter:[
+    {navn:"Halsgruben",kode:"CV22 · Tiantu",hvor:"I fordybningen lige over brystbenet. Meget blidt tryk – kun med fingerspidsen."},
+    {navn:"Brystet",kode:"LU1 · Zhongfu",hvor:"Under kravebenet, ca. 3 fingerbredder ind fra skulderen."}
+  ],
+  midler:[
+    {navn:"Honning",hvordan:"1–2 tsk før sengetid, alene eller i varm te.",adv:"Aldrig til børn under 1 år."},
+    {navn:"Timiante",hvordan:"1 tsk tørret timian i en kop kogende vand i 10 minutter. Tilsæt honning."},
+    {navn:"Fugtig luft",hvordan:"Luft ud, og hav en skål vand ved radiatoren."}
+  ],
+  ovelser:[
+    {navn:"Rolig vejrtrækning",trin:["Træk vejret ind gennem næsen.","Pust langsomt ud gennem sammenpressede læber.","Det dæmper hosteirritationen."]}
+  ],
+  raad:["Undgå røg.","Drik varmt i små slurke."],
+  laege:["Hoste i mere end 3–4 uger.","Blod i opspyt.","Åndenød, hvæsende vejrtrækning eller brystsmerter.","Høj feber med hoste."]
+},
+{
+  id:"mave", ikon:"🫃", titel:"Mavepine, oppustethed & luft", sind:false,
+  ord:["mave","oppust","luft i maven","prutter","fordøjelse","ondt i maven","mavesmert","mavekneb","ibs","tarm","boblende"],
+  kort:"Maven reagerer på stress, tempo og madvalg.",
+  punkter:[
+    {navn:"Under knæet",kode:"ST36 · Zusanli",hvor:"4 fingerbredder under knæskallen, en fingerbredde ud for skinnebenet. Det klassiske mavepunkt."},
+    {navn:"Indre håndled",kode:"P6 · Neiguan",hvor:"3 fingerbredder over håndledsfolden, mellem senerne."},
+    {navn:"Over navlen",kode:"CV12 · Zhongwan",hvor:"Midt mellem navlen og nederste spids af brystbenet. Meget blidt tryk.",adv:"Ikke ved kraftige smerter eller graviditet."}
+  ],
+  midler:[
+    {navn:"Pebermyntete",hvordan:"Afspænder tarmen og mindsker luft.",adv:"Undgå ved halsbrand."},
+    {navn:"Fennikel- eller kommente",hvordan:"Knus 1 tsk frø, hæld kogende vand over, træk 10 minutter."},
+    {navn:"Ingefær",hvordan:"Som te efter måltidet."}
+  ],
+  ovelser:[
+    {navn:"Mavemassage med uret",trin:["Lig på ryggen med bøjede knæ.","Massér med flad hånd i store cirkler med uret omkring navlen.","5 minutter – det følger tarmens retning."]},
+    {navn:"Knæ til bryst (vindslipperen)",trin:["Lig på ryggen og knus begge knæ ind mod brystet.","Vug blidt fra side til side i 1 minut."]}
+  ],
+  raad:["Spis langsomt og tyg grundigt.","Gå en tur efter maden.","Begræns brus, tyggegummi og meget løg/bønner, hvis de giver luft."],
+  laege:["Ring 112: pludselige, voldsomme mavesmerter, hård og øm mave.","Blod i afføringen eller sort afføring.","Smerter med feber, opkast eller uforklaret vægttab.","Varige ændringer i afføringen."]
+},
+{
+  id:"forstoppelse", ikon:"🚽", titel:"Forstoppelse", sind:false,
+  ord:["forstop","hård mave","kan ikke komme af med","træg mave","hård afføring"],
+  kort:"Fibre, vand og bevægelse er de tre vigtigste.",
+  punkter:[
+    {navn:"Under knæet",kode:"ST36 · Zusanli",hvor:"4 fingerbredder under knæskallen, ud for skinnebenet."},
+    {navn:"Ved navlen",kode:"ST25 · Tianshu",hvor:"3 fingerbredder ud til hver side for navlen. Blidt tryk og cirkler."}
+  ],
+  midler:[
+    {navn:"Svesker",hvordan:"4–6 svesker om dagen, eller sveskejuice."},
+    {navn:"Knuste hørfrø eller loppefrø",hvordan:"1 spsk i yoghurt eller vand – drik et ekstra glas vand til."},
+    {navn:"Varmt vand om morgenen",hvordan:"Et glas lunkent vand inden morgenmaden sætter tarmen i gang."}
+  ],
+  ovelser:[
+    {navn:"Toiletstilling",trin:["Sæt fødderne på en skammel, så knæene er over hofterne.","Læn dig let frem og slap af i maven."]},
+    {navn:"Mavemassage med uret",trin:["5 minutter med flad hånd i store cirkler."]}
+  ],
+  raad:["Spis grove grøntsager, fuldkorn, bønner og frugt.","Drik 1½–2 liter om dagen.","Gå på toilettet når du mærker trangen – og giv dig tid."],
+  laege:["Blod i afføringen.","Pludselig ændret afføringsmønster efter 40-årsalderen.","Kraftige smerter, opkast eller ingen luft/afføring i flere dage."]
+},
+{
+  id:"diarre", ikon:"💧", titel:"Diarré & tynd mave", sind:false,
+  ord:["diarr","tynd mave","løs mave","tyndskid","maveinfektion","roskilde"],
+  kort:"Det vigtigste er at erstatte væske og salt.",
+  punkter:[
+    {navn:"Under knæet",kode:"ST36 · Zusanli",hvor:"4 fingerbredder under knæskallen, ud for skinnebenet."}
+  ],
+  midler:[
+    {navn:"Væskeerstatning",hvordan:"Fra apoteket, eller: 1 liter vand + 6 tsk sukker + ½ tsk salt."},
+    {navn:"Skånekost",hvordan:"Ris, banan, gulerødder, tvebakker, havregrød."},
+    {navn:"Blåbær",hvordan:"Tørrede blåbær har traditionelt været brugt mod tynd mave."}
+  ],
+  ovelser:[],
+  raad:["Drik små mængder ofte.","Vask hænder grundigt – det smitter."],
+  laege:["Blod i afføringen eller høj feber.","Tegn på væskemangel: meget lidt urin, svimmelhed, tør mund.","Diarré i mere end 3–4 dage, eller hos små børn og ældre der bliver sløve."]
+},
+{
+  id:"halsbrand", ikon:"🔥", titel:"Halsbrand & sure opstød", sind:false,
+  ord:["halsbrand","sure opstød","syre","brænder i brystet","refluks","opstød"],
+  kort:"Mavesyre der løber op i spiserøret – ofte efter store eller sene måltider.",
+  punkter:[
+    {navn:"Indre håndled",kode:"P6 · Neiguan",hvor:"3 fingerbredder over håndledsfolden, mellem senerne."}
+  ],
+  midler:[
+    {navn:"Et glas vand eller mælk",hvordan:"Kan skylle syren ned og give hurtig lindring."},
+    {navn:"Kamillete",hvordan:"Mild og beroligende for maven."},
+    {navn:"Undgå pebermynte",hvordan:"Pebermynte kan forværre halsbrand."}
+  ],
+  ovelser:[],
+  raad:["Små måltider, og ingen mad 3 timer før sengetid.","Hæv hovedgærdet 10–15 cm.","Skær ned på kaffe, alkohol, chokolade, fed og stærk mad.","Undgå stramme bukser og bælter."],
+  laege:["Ring 112 ved trykken i brystet med udstråling til arm, kæbe eller ryg, åndenød eller sved – det kan være hjertet.","Synkebesvær, opkast med blod eller sort afføring.","Halsbrand flere gange om ugen."]
+},
+{
+  id:"traethed", ikon:"🔋", titel:"Træthed & lav energi", sind:false,
+  ord:["træt","udmattet","ingen energi","energi","sløv","drænet","udbrændt","orker ikke"],
+  kort:"Søvn, lys, bevægelse og mad er de fire store energikilder.",
+  punkter:[
+    {navn:"Under knæet",kode:"ST36 · Zusanli",hvor:"4 fingerbredder under knæskallen, ud for skinnebenet. Kaldes “de tre ekstra mils punkt”."},
+    {navn:"Fodsålen",kode:"KI1 · Yongquan",hvor:"I fordybningen forrest på fodsålen, når du krummer tæerne. Massér fast."}
+  ],
+  midler:[
+    {navn:"Vand",hvordan:"Selv let væskemangel giver træthed. Start dagen med et stort glas."},
+    {navn:"Dagslys",hvordan:"Gå ud de første timer efter du står op."},
+    {navn:"Jern- og B12-rig mad",hvordan:"Grønne bladgrøntsager, bælgfrugter, æg, fisk og kød."}
+  ],
+  ovelser:[
+    {navn:"Energi-break på 3 minutter",trin:["10 dybe vejrtrækninger ved et åbent vindue.","20 rejse-sætte-sig fra stolen.","Bank let med knyttede hænder på lår, arme og bryst."]},
+    {navn:"Kold afslutning",trin:["Slut brusebadet med 30 sekunder koldt vand."]}
+  ],
+  raad:["7–9 timers søvn på faste tider.","Spis morgenmad med protein.","Undgå tunge måltider midt på dagen.","En powernap på max 20 minutter."],
+  laege:["Træthed i mere end 2–3 uger uden forklaring – få taget blodprøver (jern, stofskifte, B12, blodsukker).","Træthed med vægttab, feber, nattesved eller åndenød."]
+},
+{
+  id:"menstruation", ikon:"🌸", titel:"Menstruationssmerter", sind:false,
+  ord:["menstruation","menssmert","underliv","periode","pms","kramper i underlivet"],
+  kort:"Varme og bevægelse er overraskende effektivt.",
+  punkter:[
+    {navn:"Indre ankel",kode:"SP6 · Sanyinjiao",hvor:"4 fingerbredder over den indvendige ankelknogle, lige bag skinnebenet.",adv:"Må ikke bruges under graviditet."},
+    {navn:"Hånd-punktet",kode:"LI4 · Hegu",hvor:"Mellem tommel- og pegefinger.",adv:"Må ikke bruges under graviditet."},
+    {navn:"Under navlen",kode:"CV6 · Qihai",hvor:"2 fingerbredder under navlen. Blidt tryk eller varme hånd."}
+  ],
+  midler:[
+    {navn:"Varmepude",hvordan:"På maven eller lænden i 20 minutter – virker for mange lige så godt som en smertestillende."},
+    {navn:"Ingefær",hvordan:"Ingefærte de første dage af menstruationen."},
+    {navn:"Kamille",hvordan:"Som te – afspændende."}
+  ],
+  ovelser:[
+    {navn:"Barnestilling",trin:["Sæt dig på hælene, før armene frem og panden ned.","Træk vejret ned i maven i 1–2 minutter."]},
+    {navn:"Bækkencirkler",trin:["Stå eller sid på en bold.","Lav langsomme cirkler med hoften. 10 hver vej."]}
+  ],
+  raad:["Let motion som gåtur eller yoga.","Begræns salt, kaffe og alkohol før og under."],
+  laege:["Smerter der ikke lindres af håndkøbsmedicin eller holder dig fra skole/arbejde.","Meget kraftig blødning.","Smerter mellem menstruationerne eller ved samleje.","Mulig graviditet med smerter og blødning – søg læge med det samme."]
+},
+{
+  id:"tand", ikon:"🦷", titel:"Tandpine", sind:false,
+  ord:["tand","tandpine","kæbe","tandkød","visdomstand"],
+  kort:"Lindring indtil du kan komme til tandlægen.",
+  punkter:[
+    {navn:"Hånd-punktet",kode:"LI4 · Hegu",hvor:"Mellem tommel- og pegefinger – klassisk mod tandpine.",adv:"Undgå under graviditet."},
+    {navn:"Kæbevinklen",kode:"ST6 · Jiache",hvor:"En fingerbredde foran kæbevinklen, hvor musklen bliver hård, når du bider sammen."}
+  ],
+  midler:[
+    {navn:"Nellikeolie",hvordan:"1 dråbe på en vatpind, dup på tanden. Eller tyg let på en hel nellike.",adv:"Ikke på tandkødet i større mængder, ikke til børn."},
+    {navn:"Saltvand",hvordan:"Skyl munden med lunkent saltvand."},
+    {navn:"Kulde udvendigt",hvordan:"Kold klud på kinden 15 minutter."}
+  ],
+  ovelser:[],
+  raad:["Sov med hovedet hævet.","Undgå meget varm, kold og sød mad."],
+  laege:["Kontakt tandlæge – tandpine går sjældent over af sig selv.","Hævelse i ansigtet, feber eller besvær med at synke eller trække vejret – søg akut hjælp."]
+},
+{
+  id:"oejne", ikon:"👁️", titel:"Trætte øjne & skærm", sind:false,
+  ord:["øjne","øje","skærm","svier","tørre øjne","sløret syn","computer"],
+  kort:"Øjnene trænger til pauser og at kigge langt.",
+  punkter:[
+    {navn:"Over øjenbrynet",kode:"BL2 · Zanzhu",hvor:"I fordybningen ved den indre ende af øjenbrynet."},
+    {navn:"Tindingerne",kode:"Taiyang",hvor:"En fingerbredde bag øjenkrogen."}
+  ],
+  midler:[
+    {navn:"Varm klud",hvordan:"Lun klud over lukkede øjne i 5 minutter – godt ved tørre øjne."},
+    {navn:"Kamilleposer",hvordan:"Afkølede kamilleteposer på øjnene."}
+  ],
+  ovelser:[
+    {navn:"20-20-20",trin:["Hvert 20. minut: kig på noget 6 meter væk i 20 sekunder."]},
+    {navn:"Palmning",trin:["Gnid hænderne varme.","Læg dem over de lukkede øjne uden tryk.","Hvil i 1 minut i mørket."]},
+    {navn:"Blink bevidst",trin:["Blink langsomt og helt 10 gange."]}
+  ],
+  raad:["Skærmen en armslængde væk og lidt under øjenhøjde.","Luft ud – tør luft giver tørre øjne."],
+  laege:["Pludseligt synstab, lysglimt eller “gardin” for øjet – søg akut.","Røde, smertende øjne med lysfølsomhed."]
+},
+{
+  id:"hud", ikon:"🌱", titel:"Små sår, forbrændinger & hudirritation", sind:false,
+  ord:["sår","forbræn","brændt","skold","solskold","kløe","udslæt","myggestik","stik","hud","eksem","rift"],
+  kort:"Naturen har flere gode midler til små skader på huden.",
+  punkter:[],
+  midler:[
+    {navn:"Koldt vand ved forbrænding",hvordan:"Hold under lunkent-koldt rindende vand i 20 minutter – med det samme.",adv:"Ingen is, smør eller tandpasta."},
+    {navn:"Aloe vera",hvordan:"Gelé direkte fra planten eller ren gel på solskoldning og let irriteret hud."},
+    {navn:"Honning på små sår",hvordan:"Medicinsk honning (fra apoteket) holder såret fugtigt og modvirker bakterier."},
+    {navn:"Havregryn-bad",hvordan:"En pose havregryn i badevandet lindrer kløe."},
+    {navn:"Kulde på stik",hvordan:"Kold klud eller isterning i et viskestykke."}
+  ],
+  ovelser:[],
+  raad:["Rens sår med rent vand.","Brug solcreme og undgå middagssolen."],
+  laege:["Forbrændinger større end håndfladen, i ansigtet, på hænder eller kønsorganer.","Rødme der breder sig, varme, pus eller feber.","Hævelse i ansigt/svælg eller åndenød efter stik – ring 112."]
+}
+];
+
+const HVERDAG = [
+  {ikon:"💧",titel:"Vand",tekst:"1½–2 liter om dagen. Start dagen med et stort glas."},
+  {ikon:"🌅",titel:"Lys",tekst:"Dagslys de første timer efter du står op – det styrer søvn og humør."},
+  {ikon:"🚶",titel:"Bevægelse",tekst:"Mindst 30 minutter om dagen, hvor du bliver let forpustet. Gå, cykel, svøm."},
+  {ikon:"🥦",titel:"Mad",tekst:"Spis grønt til hvert måltid, fuldkorn, bælgfrugter, nødder, fisk og gode olier. Mindre sukker og forarbejdet mad."},
+  {ikon:"🍯",titel:"Honning",tekst:"En god erstatning for sukker i små mængder – og godt mod hoste og ondt i halsen. Ikke til børn under 1 år."},
+  {ikon:"🌙",titel:"Søvn",tekst:"7–9 timer. Faste tider, mørkt og køligt soveværelse, ingen skærm sidste time."},
+  {ikon:"🌳",titel:"Natur",tekst:"Tid i skov, park og ved vand sænker stress og blodtryk."},
+  {ikon:"🫁",titel:"Vejrtrækning",tekst:"Langsom udånding aktiverer kroppens ro-system. Prøv 5 minutter dagligt."},
+  {ikon:"🤝",titel:"Fællesskab",tekst:"Gode relationer er en af de stærkeste faktorer for et langt, sundt liv."},
+  {ikon:"🧘",titel:"Stræk",tekst:"5 minutter morgenstræk: nakke, skuldre, ryg og hofter."},
+  {ikon:"🍷",titel:"Mindre alkohol",tekst:"Sundhedsstyrelsen anbefaler max 10 genstande om ugen og max 4 på én dag."},
+  {ikon:"🚭",titel:"Røgfri",tekst:"Det største enkeltstående skridt for helbredet. Stoplinien: 80 31 31 31."}
+];
+
+/* Faresignaler i fritekst → vis akut hjælp øverst */
+const AKUT_KROP = ["brystsmert","smerter i brystet","trykken i brystet","kan ikke trække vejret","kan ikke få luft","åndenød","lammet","lammelse","skæv i ansigtet","hængende mundvig","talebesvær","kan ikke tale","bevidstløs","besvimet","kraftig blødning","bløder meget","værste hovedpine","kaster blod op","hævet tunge","hævet svælg"];
+const AKUT_SIND = ["selvmord","tage mit liv","tage mit eget liv","vil ikke leve","ikke at leve","ikke orker at leve","slå mig selv ihjel","skade mig selv","gøre skade på mig selv","cutter","skærer i mig","vil dø","bedre hvis jeg var død","ingen grund til at leve"];
+
+/* ---------- Logik ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm = s => " " + s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu," ").replace(/\s+/g," ") + " ";
+
+let favs = [];
+try { favs = JSON.parse(localStorage.getItem("naturmanden-favs") || "[]"); } catch(e) {}
+const saveFavs = () => { try { localStorage.setItem("naturmanden-favs", JSON.stringify(favs)); } catch(e) {} };
+
+function match(text){
+  const t = norm(text);
+  return EMNER
+    .map(e => ({e, score: e.ord.reduce((n,o) => n + (t.includes(" " + o) ? o.length : 0), 0)}))
+    .filter(x => x.score > 0)
+    .sort((a,b) => b.score - a.score)
+    .map(x => x.e);
+}
+
+function urgentFor(text){
+  const t = norm(text);
+  const sind = AKUT_SIND.some(o => t.includes(" " + o));
+  const krop = AKUT_KROP.some(o => t.includes(" " + o));
+  let h = "";
+  if (sind) h += `<div class="alert red" role="alert"><strong>Du er ikke alene.</strong> Hvis du har tanker om at skade dig selv eller ikke at ville leve, så ring til <a href="tel:70201201">Livslinien 70 201 201</a> – anonymt. Er du i akut fare, ring <a href="tel:112">112</a>. Du kan også ringe til Psykiatrifonden på <a href="tel:39252525">39 25 25 25</a> eller tale med din læge.</div>`;
+  if (krop) h += `<div class="alert red" role="alert"><strong>Det du beskriver kan være alvorligt.</strong> Ring <a href="tel:112">112</a> nu ved brystsmerter, åndenød, lammelser, skævt ansigt, talebesvær, bevidstløshed eller kraftig blødning. Vent ikke på naturmidler.</div>`;
+  return h;
+}
+
+function card(e, open){
+  const isFav = favs.includes(e.id);
+  const sec = (cls, title, inner) => inner ? `<div class="sec ${cls}"><h4>${title}</h4>${inner}</div>` : "";
+  const punkter = e.punkter.length ? `<p class="howto">${TRYK}</p>` + e.punkter.map(p =>
+    `<div class="item"><b>${esc(p.navn)} <span class="code">${esc(p.kode)}</span></b><p>${esc(p.hvor)}</p>${p.adv?`<div class="warn">⚠ ${esc(p.adv)}</div>`:""}</div>`).join("") : "";
+  const midler = e.midler.map(m =>
+    `<div class="item"><b>${esc(m.navn)}</b><p>${esc(m.hvordan)}</p>${m.adv?`<div class="warn">⚠ ${esc(m.adv)}</div>`:""}</div>`).join("");
+  const ovelser = e.ovelser.map(o =>
+    `<div class="item"><b>${esc(o.navn)}</b><ol>${o.trin.map(t=>`<li>${esc(t)}</li>`).join("")}</ol></div>`).join("");
+  const raad = e.raad.length ? `<ul>${e.raad.map(r=>`<li>${esc(r)}</li>`).join("")}</ul>` : "";
+  const laege = e.laege.length ? `<ul>${e.laege.map(r=>`<li>${esc(r)}</li>`).join("")}</ul>` : "";
+  return `<details class="card" ${open?"open":""} id="c-${e.id}">
+    <summary><span class="ico">${e.ikon}</span><span class="t"><b>${esc(e.titel)}</b><small>${esc(e.kort)}</small></span>
+    <button class="fav" data-fav="${e.id}" aria-label="Gem">${isFav?"★":"☆"}</button><span class="arr">▶</span></summary>
+    <div class="body">
+      ${sec("p","👆 Trykpunkter & massage",punkter)}
+      ${sec("m","🍯 Naturlige midler",midler)}
+      ${sec("o","🧘 Øvelser",ovelser)}
+      ${sec("r","💡 Simple råd",raad)}
+      ${sec("l","🩺 Søg læge hvis",laege)}
+    </div></details>`;
+}
+
+function showTab(name){
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab===name));
+  ["results","all","favs","daily"].forEach(id => $("#"+id).classList.toggle("hide", id!==name));
+  if (name==="favs") renderFavs();
+}
+
+function renderResults(text){
+  $("#urgent").innerHTML = urgentFor(text);
+  const hits = match(text);
+  const r = $("#results");
+  if (!text.trim()) {
+    r.innerHTML = `<p class="empty">Skriv med dine egne ord hvordan du har det, eller vælg et emne ovenfor.</p>`;
+  } else if (!hits.length) {
+    r.innerHTML = `<p class="empty">Jeg fandt ikke et emne, der passer præcist. Prøv andre ord – f.eks. hvor det gør ondt, eller hvordan du har det – eller se <a href="#" data-goto="all">alle emner</a>.</p>`;
+  } else {
+    r.innerHTML = `<h2>Det kan hjælpe dig</h2>` + hits.map((e,i) => card(e, i===0)).join("");
+  }
+  showTab("results");
+  if (text.trim()) $("#urgent").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function renderAll(){
+  const grp = (sind, title) => `<h2>${title}</h2><div class="grid">` +
+    EMNER.filter(e => e.sind===sind).map(e => `<button class="tile" data-open="${e.id}"><span>${e.ikon}</span><b>${esc(e.titel)}</b></button>`).join("") + `</div>`;
+  $("#all").innerHTML = grp(false,"Kroppen") + grp(true,"Sindet & søvnen");
+}
+
+function renderFavs(){
+  const list = EMNER.filter(e => favs.includes(e.id));
+  $("#favs").innerHTML = list.length ? list.map(e => card(e,false)).join("") : `<p class="empty">Tryk på ☆ ved et emne for at gemme det her.</p>`;
+}
+
+function renderDaily(){
+  $("#daily").innerHTML = `<h2>Naturmandens sunde hverdag</h2>` +
+    HVERDAG.map(h => `<div class="card"><div class="body" style="padding-top:16px"><h3>${h.ikon} ${esc(h.titel)}</h3>${esc(h.tekst)}</div></div>`).join("");
+}
+
+function openOne(id){
+  const e = EMNER.find(x => x.id===id);
+  $("#urgent").innerHTML = "";
+  $("#results").innerHTML = card(e, true);
+  showTab("results");
+  window.scrollTo({top: $("#results").offsetTop - 10, behavior: "smooth"});
+}
+
+const CHIPS = ["hovedpine","stress","soevn","nakke","ryg","mave","forkoelelse","nedtrykt","muskler","kvalme"];
+$("#chips").innerHTML = CHIPS.map(id => { const e = EMNER.find(x=>x.id===id); return `<button class="chip" data-open="${id}">${e.ikon} ${esc(e.titel.split(" &")[0].split(" /")[0])}</button>`; }).join("");
+
+document.addEventListener("click", ev => {
+  const fav = ev.target.closest("[data-fav]");
+  if (fav) {
+    ev.preventDefault(); ev.stopPropagation();
+    const id = fav.dataset.fav;
+    favs = favs.includes(id) ? favs.filter(x => x!==id) : [...favs, id];
+    saveFavs();
+    document.querySelectorAll(`[data-fav="${id}"]`).forEach(b => b.textContent = favs.includes(id) ? "★" : "☆");
+    return;
+  }
+  const op = ev.target.closest("[data-open]");
+  if (op) return openOne(op.dataset.open);
+  const tab = ev.target.closest("[data-tab]");
+  if (tab) return showTab(tab.dataset.tab);
+  const go = ev.target.closest("[data-goto]");
+  if (go) { ev.preventDefault(); showTab(go.dataset.goto); }
+});
+$("#go").onclick = () => renderResults($("#q").value);
+$("#clear").onclick = () => { $("#q").value = ""; renderResults(""); $("#q").focus(); };
+$("#q").addEventListener("keydown", ev => { if (ev.key==="Enter" && !ev.shiftKey) { ev.preventDefault(); renderResults($("#q").value); } });
+
+renderAll(); renderDaily(); renderResults("");
+
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+</script>
+</body>
+</html>
